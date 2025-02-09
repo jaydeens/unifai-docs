@@ -32,7 +32,7 @@ title: Frequently Asked Questions
 - Contributions are welcome! Please submit a Pull Request or open an issue on our repository with your suggestions and improvements.
 
 ### Can I publish my own tools?
-- Yes, you can create and publish your own toolkits to the UnifAI marketplace. See the [Creating Toolkits](/docscreating-toolkits) section for details.
+- Yes, you can create and publish your own toolkits to the UnifAI marketplace. See the [Creating Toolkits](/creating-toolkits) section for details.
 
 ### Where can I get help?
 - Check our [GitHub repositories](https://github.com/unifai-network/) for issues and discussions
