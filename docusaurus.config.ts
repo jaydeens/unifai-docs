@@ -53,6 +53,11 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/social-card.png',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: 'UnifAI Network',
       logo: {
