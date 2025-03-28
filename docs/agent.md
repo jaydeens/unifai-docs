@@ -33,18 +33,13 @@ pip install unifai-sdk
 
 ```python
 from unifai.agent import Agent
-from unifai.client.telegram import TelegramClient
+from unifai.client import TelegramClient
  
-agent = Agent(api_key="YOUR_AGENT_API_KEY")
+agent = Agent(api_key="YOUR_UNIFAI_AGENT_API_KEY")
 
-# Add a client for communication
-telegram_client = TelegramClient(
-    token="YOUR_TELEGRAM_BOT_TOKEN",
-    allowed_user_ids=["USER_ID_1", "USER_ID_2"]
-)
+telegram_client = TelegramClient(bot_token="YOUR_TELEGRAM_BOT_TOKEN")
 agent.add_client(telegram_client)
 
-# Start the agent
 agent.run()
 ```
 
@@ -56,7 +51,7 @@ The `Agent` class is the central component of the UnifAI SDK. It coordinates:
 - Natural language processing using AI models
 - Tools execution for performing actions
 
-Agents are designed to be extensible, allowing developers to customize their behavior through prompts, model selection, and tool integration.
+Agents are designed to be extensible, allowing developers to customize their behavior through prompts, model selection, etc.
 
 ## Agent Configuration
 
@@ -69,7 +64,7 @@ from unifai.agent import Agent
 
 agent = Agent(
     api_key="YOUR_UNIFAI_API_KEY",
-    agent_id="CUSTOM_AGENT_ID",  # Optional: Allows multiple agents to maintain separate states
+    agent_id="",  # Optional: Unique identifier for the agent, useful when running multiple agents that share the same database
     clients=[],  # Optional: List of client instances
     tool_call_concurrency=10,  # Optional: Number of concurrent tool calls
 )
@@ -77,10 +72,8 @@ agent = Agent(
 
 ### Prompts Management
 
-Prompts are critical for defining how your agent interacts with users. The SDK provides several methods to manage prompts:
-
 ```python
-# Get all prompts (default + custom)
+# Get all prompts
 all_prompts = agent.get_all_prompts()
 
 # Get a specific prompt
@@ -88,11 +81,6 @@ system_prompt = agent.get_prompt("system")
 
 # Set a custom prompt
 agent.set_prompt("system", "You are a helpful AI assistant specialized in financial advice.")
-
-# Update existing prompts
-agent.update_prompts({
-    "system": "Updated system prompt..."
-})
 ```
 
 ### Model Configuration
@@ -101,7 +89,7 @@ You can specify which AI models to use for different prompts:
 
 ```python
 # Get the model for a specific prompt
-model = agent.get_model("default")  # Returns the model for the system prompt
+model = agent.get_model("default")  # Returns the model for the default prompt
 
 # Set the default model
 agent.set_model("default", "anthropic/claude-3-7-sonnet-20250219")
@@ -140,10 +128,10 @@ class SlackClient(BaseClient):
         """Stop the client"""
 
     async def receive_message(self) -> Optional[MessageContext]:
-        """Receive a message from the queue"""
+        """Receive a message from the client"""
 
     async def send_message(self, ctx: MessageContext, reply_messages: List[Message]):
-        """Send a message using the context"""
+        """Send a message"""
 ```
 
 
