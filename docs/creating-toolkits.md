@@ -59,7 +59,7 @@ You can optionally update the toolkit's name and description:
 
 ```typescript
 await toolkit.updateToolkit({ 
-    name: "Echo Slam", 
+    name: "EchoChamber", 
     description: "What's in, what's out." 
 });
 ```
@@ -69,9 +69,12 @@ await toolkit.updateToolkit({
 
 ```python
 await toolkit.update_toolkit(
-    name="Echo Slam",
+    name="EchoChamber",
     description="What's in, what's out."
 )
+
+# Or using asyncio.run():
+# asyncio.run(toolkit.update_toolkit(name="EchoChamber", description="What's in, what's out."))
 ```
 
 </TabItem>
@@ -80,7 +83,7 @@ await toolkit.update_toolkit(
 ```rust
 service
     .update_info(ToolkitInfo {
-        name: "Echo Slam".to_string(),
+        name: "EchoChamber".to_string(),
         description: "What's in, what's out.".to_string(),
     })
     .await
@@ -93,6 +96,8 @@ service
 ### Register Action Handlers
 
 Register actions that your toolkit will provide. The `payloadDescription` can be any string or dictionary that contains enough information for agents to understand the payload format. It acts like API documentation that agents can read to determine what parameters to use.
+
+Note that `payloadDescription` doesn't have to be in a certain format, as long as agents can understand it as natural language and generate the correct payload. Think of it as the comments and docs for your API, agents read it and decide what parameters to use. In practice, using JSON schema is recommended to match the format of training data.
 
 <Tabs>
 <TabItem value="js" label="JavaScript/TypeScript">
@@ -129,7 +134,7 @@ toolkit.action(
         }
     },
 )
-def echo(ctx: unifai.ActionContext, payload={}):
+async def echo(ctx: unifai.ActionContext, payload={}): # can be a sync function too
     return ctx.Result(f'You are agent <{ctx.agent_id}>, you said "{payload.get("content")}".')
 ```
 
@@ -145,23 +150,23 @@ use unifai_sdk::{
     toolkit::*,
 };
 
-struct EchoSlam;
+struct EchoChamber;
 
 #[derive(Serialize, Deserialize)]
 #[serde(crate = "serde")]
-struct EchoSlamArgs {
+struct EchoChamberArgs {
     pub content: String,
 }
 
 #[derive(Debug, Error)]
 #[error("Echo error")]
-struct EchoSlamError;
+struct EchoChamberError;
 
-impl Action for EchoSlam {
+impl Action for EchoChamber {
     const NAME: &'static str = "echo";
 
-    type Error = EchoSlamError;
-    type Args = EchoSlamArgs;
+    type Error = EchoChamberError;
+    type Args = EchoChamberArgs;
     type Output = String;
 
     async fn definition(&self) -> ActionDefinition {
@@ -194,7 +199,7 @@ impl Action for EchoSlam {
     }
 }
 
-toolkit.add_action(EchoSlam);
+toolkit.add_action(EchoChamber);
 ```
 
 </TabItem>
@@ -215,7 +220,10 @@ await toolkit.run();
 <TabItem value="py" label="Python">
 
 ```python
-asyncio.run(toolkit.run())
+await toolkit.run()
+
+# Or using asyncio.run():
+# asyncio.run(toolkit.run())
 ```
 
 </TabItem>
@@ -246,7 +254,7 @@ async function main() {
 
   // Optionally update the toolkit details
   await toolkit.updateToolkit({ 
-    name: "Echo Slam", 
+    name: "EchoChamber", 
     description: "What's in, what's out." 
   });
 
@@ -281,7 +289,7 @@ import asyncio
 toolkit = unifai.Toolkit(api_key='YOUR_TOOLKIT_API_KEY')
 
 # Update the toolkit details
-asyncio.run(toolkit.update_toolkit(name="Echo Slam", description="What's in, what's out."))
+asyncio.run(toolkit.update_toolkit(name="EchoChamber", description="What's in, what's out."))
 
 # Register an action handler
 @toolkit.action(
@@ -289,7 +297,7 @@ asyncio.run(toolkit.update_toolkit(name="Echo Slam", description="What's in, wha
     action_description="Echo the message",
     payload_description={"content": {"type": "string"}},
 )
-def echo(ctx: unifai.ActionContext, payload={}):
+async def echo(ctx: unifai.ActionContext, payload={}):
     return ctx.Result(f'You are agent <{ctx.agent_id}>, you said "{payload.get("content")}".')
 
 # Start serving the toolkit
@@ -308,23 +316,23 @@ use unifai_sdk::{
     toolkit::*,
 };
 
-struct EchoSlam;
+struct EchoChamber;
 
 #[derive(Serialize, Deserialize)]
 #[serde(crate = "serde")]
-struct EchoSlamArgs {
+struct EchoChamberArgs {
     pub content: String,
 }
 
 #[derive(Debug, Error)]
 #[error("Echo error")]
-struct EchoSlamError;
+struct EchoChamberError;
 
-impl Action for EchoSlam {
+impl Action for EchoChamber {
     const NAME: &'static str = "echo";
 
-    type Error = EchoSlamError;
-    type Args = EchoSlamArgs;
+    type Error = EchoChamberError;
+    type Args = EchoChamberArgs;
     type Output = String;
 
     async fn definition(&self) -> ActionDefinition {
@@ -365,20 +373,19 @@ async fn main() {
     let mut toolkit = ToolkitService::new("YOUR_TOOLKIT_API_KEY");
 
     let info = ToolkitInfo {
-        name: "Echo Slam".to_string(),
+        name: "EchoChamber".to_string(),
         description: "What's in, what's out.".to_string(),
     };
 
     toolkit.update_info(info).await.unwrap();
 
-    toolkit.add_action(EchoSlam);
+    toolkit.add_action(EchoChamber);
 
     let runner = toolkit.start().await.unwrap();
     let _ = runner.await.unwrap();
 }
 ```
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Toolkit Examples

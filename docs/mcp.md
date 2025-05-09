@@ -18,7 +18,7 @@ UnifAI SDK provides an [MCP (Model Context Protocol)](https://modelcontextprotoc
 ```json
 {
   "mcpServers": {
-    "unifai-tools": {
+    "unifai": {
       "command": "npx",
       "args": [
         "-y",
@@ -40,7 +40,7 @@ UnifAI SDK provides an [MCP (Model Context Protocol)](https://modelcontextprotoc
 ```json
 {
   "mcpServers": {
-    "unifai-tools": {
+    "unifai": {
       "command": "uvx",
       "args": [
         "--from",
@@ -63,5 +63,66 @@ UnifAI SDK provides an [MCP (Model Context Protocol)](https://modelcontextprotoc
 1. Install `npm` (for JavaScript/TypeScript) or `uvx` (for Python) following the official installation instructions.
 2. Update your MCP client configuration (for example, in Claude Desktop) with the JSON configuration above.
 3. Make sure you put your agent API key in the configuration file.
+
+## Configuring Tool Types
+
+You can use environment variables to control which tools are exposed by the MCP server:
+
+<Tabs>
+  <TabItem value="js" label="JavaScript/TypeScript">
+
+```json
+{
+  "mcpServers": {
+    "unifai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "-p",
+        "unifai-sdk",
+        "unifai-tools-mcp"
+      ],
+      "env": {
+        "UNIFAI_AGENT_API_KEY": "YOUR_AGENT_API_KEY",
+        "UNIFAI_DYNAMIC_TOOLS": "true",
+        "UNIFAI_STATIC_TOOLKITS": "1,2,3",
+        "UNIFAI_STATIC_ACTIONS": "ACTION_A,ACTION_B"
+      }
+    }
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="py" label="Python">
+
+```json
+{
+  "mcpServers": {
+    "unifai": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "unifai-sdk",
+        "unifai-tools-mcp"
+      ],
+      "env": {
+        "UNIFAI_AGENT_API_KEY": "YOUR_AGENT_API_KEY",
+        "UNIFAI_DYNAMIC_TOOLS": "true",
+        "UNIFAI_STATIC_TOOLKITS": "1,2,3",
+        "UNIFAI_STATIC_ACTIONS": "ACTION_A,ACTION_B"
+      }
+    }
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
+
+The environment variables control the tool discovery behavior:
+- `UNIFAI_DYNAMIC_TOOLS`: Set to "true" to enable dynamic tool discovery (default)
+- `UNIFAI_STATIC_TOOLKITS`: Comma-separated list of toolkit IDs to include
+- `UNIFAI_STATIC_ACTIONS`: Comma-separated list of action IDs to include
 
 Once configured, your MCP client will detect and utilize the tools exposed by your toolkit.
