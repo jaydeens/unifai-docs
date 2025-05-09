@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 4
 title: Tool Types
 ---
 
@@ -24,7 +24,7 @@ import { Tools } from 'unifai-sdk';
 const tools = new Tools({ apiKey: 'YOUR_AGENT_API_KEY' });
 
 // Or explicitly enable dynamic tools
-const dynamicTools = tools.getTools({ dynamicTools: true });
+const dynamicTools = await tools.getTools({ dynamicTools: true });
 ```
 
   </TabItem>
@@ -37,7 +37,7 @@ import unifai
 tools = unifai.Tools(api_key='YOUR_AGENT_API_KEY')
 
 # Or explicitly enable dynamic tools
-dynamic_tools = tools.get_tools(dynamicTools=True)
+dynamic_tools = await tools.get_tools(dynamic_tools=True)
 ```
 
   </TabItem>
@@ -68,7 +68,7 @@ Static toolkits give you more control by specifying entire toolkits to be made a
 
 ```javascript
 // Get tools from specific toolkits
-const toolkitTools = tools.getTools({
+const toolkitTools = await tools.getTools({
   dynamicTools: false,  // Optional: disable dynamic tools
   staticToolkits: ["toolkit_id_1", "toolkit_id_2"]
 });
@@ -79,9 +79,9 @@ const toolkitTools = tools.getTools({
 
 ```python
 # Get tools from specific toolkits
-toolkit_tools = tools.get_tools(
-    dynamicTools=False,  # Optional: disable dynamic tools
-    staticToolkits=["toolkit_id_1", "toolkit_id_2"]
+toolkit_tools = await tools.get_tools(
+    dynamic_tools=False,  // Optional: disable dynamic tools
+    static_toolkits=["toolkit_id_1", "toolkit_id_2"]
 )
 ```
 
@@ -110,7 +110,7 @@ Static actions provide the most granular control, allowing you to specify indivi
 
 ```javascript
 // Get specific actions
-const actionTools = tools.getTools({
+const actionTools = await tools.getTools({
   dynamicTools: false,  // Optional: disable dynamic tools
   staticActions: ["action_id_1", "action_id_2"]
 });
@@ -121,9 +121,9 @@ const actionTools = tools.getTools({
 
 ```python
 # Get specific actions
-action_tools = tools.get_tools(
-    dynamicTools=False,  # Optional: disable dynamic tools
-    staticActions=["action_id_1", "action_id_2"]
+action_tools = await tools.get_tools(
+    dynamic_tools=False,  // Optional: disable dynamic tools
+    static_actions=["action_id_1", "action_id_2"]
 )
 ```
 
@@ -152,7 +152,7 @@ You can combine these approaches to create a customized tool setup:
 
 ```javascript
 // Combine dynamic and static tools
-const combinedTools = tools.getTools({
+const combinedTools = await tools.getTools({
   dynamicTools: true,  // Enable dynamic discovery
   staticToolkits: ["essential_toolkit_id"],  // Always include this toolkit
   staticActions: ["critical_action_id"]  // Always include this specific action
@@ -164,10 +164,10 @@ const combinedTools = tools.getTools({
 
 ```python
 # Combine dynamic and static tools
-combined_tools = tools.get_tools(
-    dynamicTools=True,  # Enable dynamic discovery
-    staticToolkits=["essential_toolkit_id"],  # Always include this toolkit
-    staticActions=["critical_action_id"]  # Always include this specific action
+combined_tools = await tools.get_tools(
+    dynamic_tools=True,  // Enable dynamic discovery
+    static_toolkits=["essential_toolkit_id"],  // Always include this toolkit
+    static_actions=["critical_action_id"]  // Always include this specific action
 )
 ```
 
@@ -192,7 +192,7 @@ You can control the caching behavior of tool results:
 
 ```javascript
 // Enable cache control
-const toolsWithCache = tools.getTools({ cacheControl: true });
+const toolsWithCache = await tools.getTools({ cacheControl: true });
 ```
 
   </TabItem>
@@ -200,7 +200,7 @@ const toolsWithCache = tools.getTools({ cacheControl: true });
 
 ```python
 # Enable cache control
-tools_with_cache = tools.get_tools(cache_control=True)
+tools_with_cache = await tools.get_tools(cache_control=True)
 ```
 
   </TabItem>

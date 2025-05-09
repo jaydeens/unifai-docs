@@ -55,7 +55,7 @@ const messages = [{ content: "What is trending on Google today?", role: "user" }
 const response = await openai.chat.completions.create({
   model: "gpt-4o",
   messages,
-  tools: tools.getTools(),
+  tools: await tools.getTools(),
 });
 messages.push(response.choices[0].message);
 if (response.choices[0].message.tool_calls) {
@@ -73,7 +73,7 @@ messages = [{"content": "What is trending on Google today?", "role": "user"}]
 response = client.chat.completions.create(
     model="gpt-4o",
     messages=messages,
-    tools=tools.get_tools(),
+    tools=await tools.get_tools(),
 )
 messages.append(response.choices[0].message)
 if response.choices[0].message.get("tool_calls"):
@@ -111,7 +111,7 @@ while (true) {
   const response = await openai.chat.completions.create({
     model: "gpt-4o",
     messages,
-    tools: tools.getTools(),
+    tools: await tools.getTools(),
   });
   messages.push(response.choices[0].message);
   const results = await tools.callTools(response.choices[0].message.tool_calls);
@@ -129,7 +129,7 @@ while True:
     response = client.chat.completions.create(
         model="gpt-4o",
         messages=messages,
-        tools=tools.get_tools(),
+        tools=await tools.get_tools(),
     )
     messages.append(response.choices[0].message)
     results = await tools.call_tools(response.choices[0].message.tool_calls)
