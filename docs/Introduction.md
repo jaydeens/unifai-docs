@@ -2,7 +2,7 @@
 
 Discover **UnifAI**, a platform that empowers AI agents with dynamic tools, secure execution, and autonomous operations. This overview covers its core components, key benefits, and features.
 
-UnifAI is an **infrastructure of autonomous AI agents** that simplifies DeFi for users and developers alike:
+[UnifAI](https://unifai.network/) is an **infrastructure of autonomous AI agents** that simplifies DeFi for users and developers alike:
 
 - **End-users:** UnifAI executes strategies on their behalf, allowing them to benefit from DeFi opportunities without being online constantly or needing deep technical knowledge.  
 - **Developers & projects:** UniFAI provides a modular, secure, and interoperable infrastructure to build, deploy, and scale AI agents across DeFi protocols.
@@ -44,7 +44,7 @@ UnifAI addresses the key challenges of both end-users and developers in DeFi:
 - **Security-First Design:** Sensitive data stays client-side with configurable access controls.  
 - **Pioneering DeFi Infrastructure:** UnifAI is the first fully integrated, DeFi-native platform enabling agents to coordinate across protocols, operate securely at scale, and deliver real impact.
 
-Read more about the state of AI agents in DeFi.
+[Read more about the state of AI agents in DeFi.](https://www.forbes.com/sites/clorischen/2025/04/26/ai-agents-havent-taken-over-defi-yet/)
 
 ---
 
